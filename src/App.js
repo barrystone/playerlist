@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import CardList from "./CardList";
+import SearchBox from "./SearchBox";
+import { rocketRoster } from "./_data/roster";
 
-function App() {
+const App = () => {
+  const [searchfield, setSearchfield] = useState("");
+  const onSearchChange = (event) => {
+    setSearchfield(event.target.value);
+  };
+  const filterRoster = rocketRoster.filter((player) => {
+    return player.name.toLowerCase().includes(searchfield.toLowerCase());
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="tc">
+      <h1>Teams</h1>;
+      <SearchBox onSearchChange={onSearchChange} />
+      <CardList roster={filterRoster} />
     </div>
   );
-}
+};
 
 export default App;

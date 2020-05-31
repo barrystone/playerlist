@@ -1,3 +1,10 @@
+## Introduction
+
+Player list React single-page-application.
+
+Type word in the search bar will automatically be filtering the result.
+Use tachyons as CSS framework.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
