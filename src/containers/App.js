@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { produce } from "immer";
-import "./App.css";
-import CardList from "./component/CardList";
-import SearchBox from "./component/SearchBox";
-// import roster from "./_data/roster/Rockets";
+import "../assets/css/App.css";
+import CardList from "../components/CardList";
+import SearchBox from "../components/SearchBox";
+import Scroll from "../components/Scroll";
+import ErrorBoundary from "../components/ErrorBoundary";
+import roster from "../_data/roster/Rockets";
 // import roster from "./_data/roster/Warriors.json";
 // import roster from "./_data/roster/Mavericks.json";
 // import roster from "./_data/roster/Clippers.json";
@@ -26,8 +28,8 @@ const App = () => {
     setRosterData(data);
   };
   useEffect(() => {
-    fetchData();
-    // setRosterData(roster);
+    // fetchData();
+    setRosterData(roster);
     console.log("fetching");
   }, []);
   useEffect(() => {
@@ -68,7 +70,11 @@ const App = () => {
         onSearchChange={onSearchChange}
         onSearchClick={onSearchClick}
       />
-      <CardList roster={filterRoster ? filterRoster : rosterData} />
+      <Scroll>
+        <ErrorBoundary>
+          <CardList roster={filterRoster ? filterRoster : rosterData} />
+        </ErrorBoundary>
+      </Scroll>
     </div>
   );
 };

@@ -4,8 +4,7 @@
   font-family: "HACKED Regular";
   font-style: normal;
   font-weight: normal;
-  src: local("HACKED Regular"),
-    url("assets/font/HACKED_Title.woff") format("woff");
+  src: local("HACKED Regular"), url("../font/HACKED_Title.woff") format("woff");
 }
 
 h1 {
