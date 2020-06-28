@@ -1,50 +1,54 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import { produce } from "immer";
 import "../assets/css/App.css";
 import CardList from "../components/CardList";
 import SearchBox from "../components/SearchBox";
 import Scroll from "../components/Scroll";
 import ErrorBoundary from "../components/ErrorBoundary";
-import roster from "../_data/roster/Rockets";
-// import roster from "./_data/roster/Warriors.json";
-// import roster from "./_data/roster/Mavericks.json";
-// import roster from "./_data/roster/Clippers.json";
-// import roster from "./_data/roster/Spurs.json";
-// import roster from "./_data/roster/Lakers.json";
 
-const App = () => {
-  const [searchfield, setSearchfield] = useState("");
-  const [rosterData, setRosterData] = useState([]);
+import { setSearchField, requestPlayers } from "../actions";
+
+const mapStateToProps = (state) => {
+  return {
+    searchField: state.searchPlayers.searchField,
+    rosterData: state.requestPlayers.rosterData,
+    isPending: state.requestPlayers.isPending,
+    error: state.requestPlayers.error,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+    onRequestPlayers: () => dispatch(requestPlayers()),
+  };
+};
+
+const App = (props) => {
+  const {
+    searchField,
+    onSearchChange,
+    rosterData,
+    onRequestPlayers,
+    isPending,
+  } = props;
   let [filterRoster, setFilterRoster] = useState([]);
 
-  const fetchData = async () => {
-    const data = await fetch(
-      `https://api.sportsdata.io/v3/nba/stats/json/Players/HOU?key=${process.env.REACT_APP_SPORTDATAIO_API_KEY_2}`
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        return result;
-      });
-    setRosterData(data);
-  };
   useEffect(() => {
-    // fetchData();
-    setRosterData(roster);
+    onRequestPlayers();
     console.log("fetching");
   }, []);
   useEffect(() => {
     setFilterRoster(rosterData);
     console.log("initial setFilterRoster");
   }, [rosterData]);
-  const onSearchChange = (event) => {
-    setSearchfield(event.target.value);
-  };
+
   useEffect(() => {
     setFilterRoster(
       rosterData.map((player) =>
         (player.FirstName + " " + player.LastName)
           .toLowerCase()
-          .includes(searchfield.toLowerCase())
+          .includes(searchField.toLowerCase())
           ? player
           : produce(player, (draftPlayer) => {
               draftPlayer.Unsearched = true;
@@ -52,18 +56,20 @@ const App = () => {
       )
     );
     console.log("onChange setFilterRoster");
-  }, [searchfield]);
+  }, [searchField]);
   const onSearchClick = () => {
     setFilterRoster(
       rosterData.filter((player) =>
         (player.FirstName + " " + player.LastName)
           .toLowerCase()
-          .includes(searchfield.toLowerCase())
+          .includes(searchField.toLowerCase())
       )
     );
     console.log("onClick setFilterRoster");
   };
-  return (
+  return isPending ? (
+    <h1>Loading</h1>
+  ) : (
     <div className="tc">
       <h1 className="f1 ma3">Roster</h1>
       <SearchBox
@@ -79,4 +85,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

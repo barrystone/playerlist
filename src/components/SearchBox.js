@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Box } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 const SearchBox = ({ onSearchChange, onSearchClick }) => {
   return (
@@ -9,10 +9,9 @@ const SearchBox = ({ onSearchChange, onSearchClick }) => {
         type="search"
         placeholder="Player name"
         onChange={onSearchChange}
-        onKeyPress={(e) => (e.key == "Enter" ? onSearchClick() : null)}
+        onKeyPress={(e) => (e.key === "Enter" ? onSearchClick() : null)}
       />
       &nbsp;&nbsp;
-      {/* <Box ml={3}> */}
       <Button
         variant="contained"
         justify="space-between"
@@ -20,7 +19,6 @@ const SearchBox = ({ onSearchChange, onSearchClick }) => {
       >
         search
       </Button>
-      {/* </Box> */}
     </div>
   );
 };
