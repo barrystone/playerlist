@@ -17,6 +17,7 @@ const rootReducer = combineReducers({ searchPlayers, requestPlayers });
 const store = createStore(
   rootReducer,
   applyMiddleware(thunkMiddleware, logger)
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 ReactDOM.render(

@@ -1,0 +1,3 @@
+style not perfect for my expectaition
+
+code is hard to mataining (tachyons css, material ui(makestyle/useMediaQuery), inline-css)

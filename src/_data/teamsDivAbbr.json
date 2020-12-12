@@ -1,0 +1,56 @@
+[
+  {
+    "Atlantic": [
+      ["TOR", "Toronto Raptors", "#cd1141"],
+      ["BOS", "Boston Celtics", "#008248"],
+      ["PHI", "Philadelphia 76ers", "#006bb6"],
+      ["BKN", "Brooklyn Nets", "#000000"],
+      ["NY", "New York Knicks", "#f58426"]
+    ]
+  },
+  {
+    "Central": [
+      ["MIL", "Milwaukee Bucks", "#00471b"],
+      ["IND", "Indiana Pacers", "#fdbb30"],
+      ["CHI", "Chicago Bulls", "#ce1141"],
+      ["DET", "Detroit Pistons", "#c8102e"],
+      ["CLE", "Cleveland Cavaliers", "#6f2633"]
+    ]
+  },
+  {
+    "Southeast": [
+      ["MIA", "Miami Heat", "#98002e"],
+      ["ORL", "Orlando Magic", "#0b77bd"],
+      ["WAS", "Washington Wizards", "#e31837"],
+      ["CHA", "Charlotte Hornets", "#00788c"],
+      ["ATL", "Atlanta Hawks", "#e03a3e"]
+    ]
+  },
+  {
+    "Northwest": [
+      ["DEN", "Denver Nuggets", "#ffc627"],
+      ["UTA", "Utah Jazz", "#0d2240"],
+      ["OKC", "Oklahoma City Thunder", "#007ac1"],
+      ["POR", "Portland Trail Blazers", "#cf0a2c"],
+      ["MIN", "Minnesota Timberwolves", "#236192"]
+    ]
+  },
+  {
+    "Pacific": [
+      ["LAL", "Los Angeles Lakers", "#552583"],
+      ["LAC", "Los Angeles Clippers", "#061922"],
+      ["SAC", "Sacramento Kings", "#5b2b82"],
+      ["PHO", "Phoenix Suns", "#f9a01b"],
+      ["GS", "Golden State Warriors", "#fdb927"]
+    ]
+  },
+  {
+    "Southwest": [
+      ["HOU", "Houston Rockets", "#ce1141"],
+      ["DAL", "Dallas Mavericks", "#007dc5"],
+      ["MEM", "Memphis Grizzlies", "#5d76a9"],
+      ["NO", "New Orleans Pelicans", "#002b5c"],
+      ["SA", "San Antonio Spurs", "#c4ced4"]
+    ]
+  }
+]

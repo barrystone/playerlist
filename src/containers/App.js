@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { produce } from "immer";
-import "../assets/css/App.css";
-import CardList from "../components/CardList";
-import SearchBox from "../components/SearchBox";
-import Scroll from "../components/Scroll";
-import ErrorBoundary from "../components/ErrorBoundary";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { produce } from 'immer';
+import '../assets/css/App.css';
+import CardList from '../components/CardList';
+import Scroll from '../components/Scroll';
+import ErrorBoundary from '../components/ErrorBoundary';
+import Bar from '../components/Bar';
 
-import { setSearchField, requestPlayers } from "../actions";
+import { setSearchField, requestPlayers } from '../actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
-    onRequestPlayers: () => dispatch(requestPlayers()),
+    onRequestPlayers: (team) => dispatch(requestPlayers(team)),
   };
 };
 
@@ -32,21 +32,25 @@ const App = (props) => {
     onRequestPlayers,
     isPending,
   } = props;
+
   let [filterRoster, setFilterRoster] = useState([]);
 
+  const [selectTeam, setSelectTeam] = useState('Roster');
+
   useEffect(() => {
-    onRequestPlayers();
-    console.log("fetching");
+    // DEFAULT request team 'HOU'
+    // onRequestPlayers(selectTeam);
+    console.log('fetching');
   }, []);
   useEffect(() => {
     setFilterRoster(rosterData);
-    console.log("initial setFilterRoster");
+    console.log('initial setFilterRoster');
   }, [rosterData]);
 
   useEffect(() => {
     setFilterRoster(
       rosterData.map((player) =>
-        (player.FirstName + " " + player.LastName)
+        (player.FirstName + ' ' + player.LastName)
           .toLowerCase()
           .includes(searchField.toLowerCase())
           ? player
@@ -55,31 +59,47 @@ const App = (props) => {
             })
       )
     );
-    console.log("onChange setFilterRoster");
+    console.log('onChange setFilterRoster');
   }, [searchField]);
   const onSearchClick = () => {
     setFilterRoster(
       rosterData.filter((player) =>
-        (player.FirstName + " " + player.LastName)
+        (player.FirstName + ' ' + player.LastName)
           .toLowerCase()
           .includes(searchField.toLowerCase())
       )
     );
-    console.log("onClick setFilterRoster");
+    console.log('onClick setFilterRoster');
   };
-  return isPending ? (
-    <h1>Loading</h1>
-  ) : (
-    <div className="tc">
-      <h1 className="f1 ma3">Roster</h1>
-      <SearchBox
-        onSearchChange={onSearchChange}
-        onSearchClick={onSearchClick}
-      />
+
+  //has problem todo
+
+  const onTeamChange = (teamAbbr, teamName) => {
+    setSelectTeam(teamName);
+    onRequestPlayers(teamAbbr);
+    console.log('selectTeam', selectTeam);
+    // onRequestPlayers(selectTeam);
+    console.log('fetching (changeTeam)');
+  };
+
+  return (
+    <div className='tc'>
+      <header>
+        <Bar
+          onSearchChange={onSearchChange}
+          onSearchClick={onSearchClick}
+          onTeamChange={onTeamChange}
+          team={selectTeam}
+        />
+      </header>
       <Scroll>
-        <ErrorBoundary>
-          <CardList roster={filterRoster ? filterRoster : rosterData} />
-        </ErrorBoundary>
+        {isPending ? (
+          <h1>Loading</h1>
+        ) : (
+          <ErrorBoundary>
+            <CardList roster={filterRoster ? filterRoster : rosterData} />
+          </ErrorBoundary>
+        )}
       </Scroll>
     </div>
   );
