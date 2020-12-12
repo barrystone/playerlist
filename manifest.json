@@ -1,5 +1,5 @@
 {
-  "short_name": "NBA roster 8",
+  "short_name": "NBA roster 9",
   "name": "made by barrystone",
   "icons":[
     {
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#CFCFCF",
-  "background_color": "#CFCFCF"
+  "theme_color": "#BBBBBB",
+  "background_color": "#BBBBBB"
 }
