@@ -1,12 +1,12 @@
 {
-  "short_name": "NBA roster",
-  "name": "made by barrystone",
+  "short_name": "NBA roster 5",
+  "name": "made by barrystone 5",
   "icons":[
     {"src":"/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},
     {"src":"/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#D19A09",
+  "theme_color": "#CE1141",
   "background_color": "#CFCFCF"
 }
